@@ -1,0 +1,314 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<meta name="claude:viewport-fit-sides" content="cover">
+<title>Nāami Guest Wi-Fi</title>
+<meta name="robots" content="noindex">
+<link rel="icon" href="../assets/favicon.svg" type="image/svg+xml">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Jost:wght@300;400;500&family=Figtree:wght@400;500;600&family=IBM+Plex+Mono:wght@400;500&display=swap">
+<style>
+/* Layout: an installer's plan in the Nāami house style. Single column of ruled sections, with the live portal preview beside the intro. */
+:root{
+  --paper:#fbfbf9; --ink:#111211; --muted:#5e605d; --rule:#d9dad6; --wash:#eeefeb; --flag:#8a6d2f;
+  --display:"Jost","Futura","Century Gothic",system-ui,sans-serif;
+  --body:"Figtree","Helvetica Neue",Arial,system-ui,sans-serif;
+  --mono:"IBM Plex Mono",ui-monospace,Menlo,monospace;
+}
+@media (prefers-color-scheme:dark){:root:not([data-theme="light"]){--paper:#101110;--ink:#f1f1ee;--muted:#a3a5a0;--rule:#2c2e2b;--wash:#1a1b1a;--flag:#d4b06a;color-scheme:dark}}
+:root[data-theme="dark"]{--paper:#101110;--ink:#f1f1ee;--muted:#a3a5a0;--rule:#2c2e2b;--wash:#1a1b1a;--flag:#d4b06a;color-scheme:dark}
+*{box-sizing:border-box}
+body{margin:0;background:var(--paper);color:var(--ink);font-family:var(--body);font-size:16px;line-height:1.6;-webkit-font-smoothing:antialiased}
+:focus-visible{outline:2px solid var(--ink);outline-offset:3px}
+.wrap{max-width:1100px;margin:0 auto;padding-left:max(16px,env(safe-area-inset-left,0px));padding-right:max(16px,env(safe-area-inset-right,0px))}
+@media (min-width:760px){.wrap{padding-left:max(40px,env(safe-area-inset-left,0px));padding-right:max(40px,env(safe-area-inset-right,0px))}}
+h1,h2,h3{font-family:var(--display);font-weight:300;margin:0;text-wrap:balance}
+h1{font-size:clamp(36px,6vw,64px);line-height:1.05}
+h2{font-size:clamp(26px,3.4vw,38px);line-height:1.1}
+h3{font-size:19px;font-weight:400}
+p{margin:0;max-width:64ch}
+.eyebrow{font-family:var(--mono);font-size:11.5px;letter-spacing:.14em;text-transform:uppercase;color:var(--muted)}
+.lede{font-size:18px;color:var(--muted);max-width:54ch}
+.stack{display:flex;flex-direction:column;gap:18px}
+.stack>*{min-width:0}
+.mark{display:inline-flex;flex-direction:column;align-items:center;line-height:1;gap:5px;text-decoration:none;color:var(--ink)}
+.mark svg{height:18px;width:auto;aspect-ratio:412/82}
+.mark small{font-family:var(--display);font-size:9.5px;letter-spacing:.3em;text-transform:uppercase;color:var(--muted)}
+header.top{border-bottom:1px solid var(--rule)}
+header.top .wrap{display:flex;justify-content:space-between;align-items:center;gap:16px;min-height:68px}
+section{padding-block:clamp(48px,7vw,88px)}
+section+section{border-top:1px solid var(--rule)}
+.intro{display:grid;grid-template-columns:repeat(auto-fit,minmax(min(100%,380px),1fr));gap:clamp(36px,6vw,80px);align-items:center}
+.intro>*{min-width:0}
+.flag{font-family:var(--mono);font-size:11px;letter-spacing:.08em;text-transform:uppercase;color:var(--flag);border:1px solid currentColor;padding:2px 7px;border-radius:2px;white-space:nowrap;display:inline-block;width:fit-content}
+.facts{display:grid;grid-template-columns:repeat(auto-fit,minmax(min(100%,130px),1fr));border-top:1px solid var(--rule);border-bottom:1px solid var(--rule)}
+.fact{padding:16px 16px 16px 0;display:flex;flex-direction:column;gap:4px}
+@media (min-width:700px){.fact+.fact{padding-left:16px;border-left:1px solid var(--rule)}}
+.fact b{font-family:var(--display);font-weight:400;font-size:20px}
+
+/* Phone + portal preview */
+.phone{width:min(330px,100%);margin:0 auto;aspect-ratio:9/18.5;border:10px solid #111211;border-radius:42px;overflow:hidden;position:relative;background:#111211;box-shadow:0 30px 60px -30px rgba(0,0,0,.45)}
+.portal{position:absolute;inset:0;background:#3a3c39 url("portal-bg.jpg") center/cover no-repeat;display:flex;flex-direction:column;justify-content:flex-end;padding:14px}
+.portal .card{background:#fbfbf9;color:#111211;padding:22px 20px 20px;display:flex;flex-direction:column;gap:12px}
+.portal .card img{width:62%;align-self:center;height:auto}
+.portal h3{font-family:var(--display);font-weight:400;font-size:20px;text-align:center;color:#111211}
+.portal p{font-size:13px;color:#5e605d;text-align:center;line-height:1.45}
+.portal label.code{font-family:var(--mono);font-size:10px;letter-spacing:.14em;text-transform:uppercase;color:#5e605d}
+.portal input[type=text]{font:inherit;font-family:var(--mono);font-size:16px;letter-spacing:.12em;border:0;border-bottom:1px solid #111211;padding:6px 0;background:transparent;color:#111211;width:100%;border-radius:0}
+.portal .agree{display:flex;gap:8px;align-items:flex-start;font-size:12px;color:#5e605d;line-height:1.4}
+.portal .agree input{accent-color:#111211;margin-top:2px}
+.portal button{font-family:var(--display);font-size:12.5px;letter-spacing:.2em;text-transform:uppercase;background:#111211;color:#fbfbf9;border:1px solid #111211;min-height:44px;cursor:pointer}
+.portal .msg{font-size:12px;text-align:center;color:#111211;min-height:1.4em}
+.portal .ssid{position:absolute;top:10px;left:0;right:0;text-align:center;font-family:var(--mono);font-size:10px;letter-spacing:.12em;color:#fbfbf9;text-transform:uppercase;opacity:.85}
+.caption{text-align:center;font-size:13px;color:var(--muted);margin-top:14px}
+
+/* Flow diagram */
+.flow{display:flex;flex-wrap:wrap;align-items:stretch;gap:10px}
+.node{flex:1 1 150px;border:1px solid var(--rule);padding:14px 14px 16px;display:flex;flex-direction:column;gap:6px;min-width:0}
+.node.key{border-color:var(--ink)}
+.node b{font-family:var(--display);font-weight:400;font-size:16px;line-height:1.25}
+.node span{font-size:13px;color:var(--muted);line-height:1.45}
+.arrow{align-self:center;font-family:var(--display);color:var(--muted)}
+@media (max-width:640px){.flow{flex-direction:column}.arrow{transform:rotate(90deg)}}
+
+/* Tables */
+.tablewrap{overflow-x:auto;border-top:1px solid var(--ink)}
+table{border-collapse:collapse;width:100%;min-width:640px}
+th,td{text-align:left;padding:14px 16px 14px 0;border-bottom:1px solid var(--rule);vertical-align:top;font-size:15px}
+th{font-family:var(--mono);font-size:11px;font-weight:500;letter-spacing:.12em;text-transform:uppercase;color:var(--muted)}
+td:first-child{font-family:var(--display);font-size:16px}
+td.num{font-variant-numeric:tabular-nums;white-space:nowrap}
+td small{display:block;color:var(--muted);font-size:13px;margin-top:2px}
+
+/* Steps */
+ol.steps{list-style:none;margin:0;padding:0;counter-reset:s;border-top:1px solid var(--ink)}
+ol.steps li{counter-increment:s;display:grid;grid-template-columns:48px 1fr;gap:12px;padding:18px 0;border-bottom:1px solid var(--rule)}
+ol.steps li::before{content:counter(s,decimal-leading-zero);font-family:var(--mono);font-size:13px;color:var(--muted);padding-top:3px}
+ol.steps li>div{min-width:0;display:flex;flex-direction:column;gap:4px}
+ol.steps p{color:var(--muted);font-size:15px}
+
+/* Copy fields */
+dl.fields{margin:0;border-top:1px solid var(--ink)}
+dl.fields div{display:grid;grid-template-columns:minmax(130px,1fr) 3fr auto;gap:16px;align-items:start;padding:14px 0;border-bottom:1px solid var(--rule)}
+dl.fields dt{font-family:var(--mono);font-size:11.5px;letter-spacing:.1em;text-transform:uppercase;color:var(--muted);padding-top:3px}
+dl.fields dd{margin:0;min-width:0}
+.copy{font-family:var(--mono);font-size:10.5px;letter-spacing:.1em;text-transform:uppercase;background:none;border:1px solid var(--rule);color:var(--ink);padding:4px 9px;cursor:pointer}
+.copy:hover{border-color:var(--ink)}
+@media (max-width:600px){dl.fields div{grid-template-columns:1fr auto}dl.fields dt{grid-column:1/-1}}
+.swatch{display:inline-block;width:12px;height:12px;border:1px solid var(--rule);vertical-align:-1px;margin-right:6px}
+.assets{display:grid;grid-template-columns:repeat(auto-fit,minmax(min(100%,220px),1fr));gap:20px}
+.asset{display:flex;flex-direction:column;gap:8px;min-width:0}
+.asset .thumb{aspect-ratio:16/9;max-width:100%;border:1px solid var(--rule);background:var(--wash) center/contain no-repeat;display:block}
+.asset .thumb.dark{background-color:#111211}
+.asset .thumb.cover{background-size:cover}
+.asset code{font-family:var(--mono);font-size:12.5px}
+.asset span{font-size:13px;color:var(--muted)}
+
+/* Checks */
+ul.checks{list-style:none;margin:0;padding:0;display:grid;grid-template-columns:repeat(auto-fit,minmax(min(100%,300px),1fr));gap:0 40px}
+ul.checks li{padding:16px 0;border-bottom:1px solid var(--rule);display:flex;flex-direction:column;gap:6px}
+ul.checks p{font-size:15px;color:var(--muted)}
+footer{border-top:1px solid var(--ink);padding-block:32px 48px;font-size:13px;color:var(--muted)}
+footer .wrap{display:flex;flex-wrap:wrap;justify-content:space-between;gap:12px}
+</style>
+</head>
+<body>
+
+<svg width="0" height="0" style="position:absolute" aria-hidden="true" focusable="false">
+  <defs><clipPath id="wmClip"><rect x="-10" y="-20" width="440" height="98"/></clipPath></defs>
+  <symbol id="wm" viewBox="0 -4 412 82">
+    <g clip-path="url(#wmClip)" fill="none" stroke="currentColor" stroke-width="8" stroke-miterlimit="10">
+      <path d="M5 84V20L66 78V20"/><path d="M90 84L131 20L172 84"/><path d="M190 84L231 20L272 84"/><path d="M296 84V20L337 68L378 20V84"/><path d="M406 20V84"/>
+    </g>
+    <rect x="111" y="-3" width="40" height="6" fill="currentColor"/>
+  </symbol>
+</svg>
+
+<header class="top">
+  <div class="wrap">
+    <span class="mark"><svg viewBox="0 0 412 82" role="img" aria-label="Nāami"><use href="#wm" width="412" height="82"/></svg><small>Coast Club · Kahawa</small></span>
+    <span class="eyebrow">Guest Wi-Fi plan · Nov 2026</span>
+  </div>
+</header>
+
+<main>
+<section>
+  <div class="wrap intro">
+    <div class="stack">
+      <span class="eyebrow">Starlink + UniFi</span>
+      <h1>Guest Wi‑Fi with a code for every guest</h1>
+      <p class="lede">Starlink brings the internet in. A UniFi gateway runs the Nāami login page and issues Wi-Fi codes for each guest type, with time limits and speed limits so no one can slow down the cowork calls. All of it runs on site, with no software subscriptions.</p>
+      <div class="facts">
+        <div class="fact"><span class="eyebrow">Internet</span><b>Starlink Residential</b><span style="font-size:13px;color:var(--muted)">LKR 15,000 / month, unlimited data*</span></div>
+        <div class="fact"><span class="eyebrow">Software cost</span><b>LKR 0</b><span style="font-size:13px;color:var(--muted)">Login page and codes are built into UniFi</span></div>
+        <div class="fact"><span class="eyebrow">Hardware</span><b>One-off</b><span style="font-size:13px;color:var(--muted)">Get local quotes</span></div>
+      </div>
+      <p style="font-size:13px;color:var(--muted)">*Price from starlink.com/lk/service-plans, checked 6 November 2026. See the checks below about using a Residential plan for a business.</p>
+    </div>
+    <div>
+      <div class="phone">
+        <form class="portal" id="portal" autocomplete="off">
+          <span class="ssid">Wi-Fi · NAAMI Guest</span>
+          <div class="card">
+            <img src="portal-logo.png" alt="Nāami Coast Club, Kahawa">
+            <h3>Welcome to Nāami</h3>
+            <p>Enter the Wi-Fi code from your check-in card, cowork pass or café receipt.</p>
+            <label class="code" for="code">Wi-Fi code</label>
+            <input type="text" id="code" placeholder="12345-67890" inputmode="numeric" maxlength="11">
+            <label class="agree"><input type="checkbox" id="agree" checked> I agree to the house rules and fair use.</label>
+            <button type="submit">Connect</button>
+            <div class="msg" id="msg" aria-live="polite"></div>
+          </div>
+        </form>
+      </div>
+      <p class="caption">Preview of the login page guests see when they join NAAMI Guest.</p>
+    </div>
+  </div>
+</section>
+
+<section>
+  <div class="wrap stack" style="gap:28px">
+    <div class="stack"><span class="eyebrow">How it connects</span><h2>From the dish to the guest's phone</h2></div>
+    <div class="flow">
+      <div class="node"><b>Starlink Standard dish</b><span>On the roof with a clear view of the sky.</span></div>
+      <span class="arrow" aria-hidden="true">→</span>
+      <div class="node"><b>Starlink router</b><span>Bypass Mode. Its Wi-Fi is off, it only passes the internet through.</span></div>
+      <span class="arrow" aria-hidden="true">→</span>
+      <div class="node key"><b>UniFi Cloud Gateway Ultra</b><span>Runs the network, the login page and the Wi-Fi codes.</span></div>
+      <span class="arrow" aria-hidden="true">→</span>
+      <div class="node"><b>UniFi PoE switch</b><span>Powers the access points over the network cable.</span></div>
+      <span class="arrow" aria-hidden="true">→</span>
+      <div class="node"><b>UniFi access points</b><span>Broadcast NAAMI Guest and NAAMI Staff around the property.</span></div>
+    </div>
+    <p style="font-size:15px;color:var(--muted)">Starlink gives a shared (CGNAT) address. That doesn't matter here, because the login page runs on the gateway inside the building.</p>
+  </div>
+</section>
+
+<section>
+  <div class="wrap stack" style="gap:28px">
+    <div class="stack"><span class="eyebrow">Shopping list</span><h2>What to buy</h2></div>
+    <div class="tablewrap">
+      <table>
+        <thead><tr><th scope="col">Item</th><th scope="col">What it does</th><th scope="col">Notes</th></tr></thead>
+        <tbody>
+          <tr><td>Starlink Standard kit</td><td>Dish, Gen 3 router, cable and power supply.</td><td>The Gen 3 router has Ethernet ports. Older routers without one need the Starlink Ethernet Adapter.</td></tr>
+          <tr><td>Starlink Residential plan</td><td>Unlimited data, monthly.</td><td>LKR 15,000 / month. <span class="flag">Check terms</span></td></tr>
+          <tr><td>UniFi Cloud Gateway Ultra</td><td>The brain: routing, firewall, guest login page, Wi-Fi codes.</td><td>No licence or subscription. Managed from the UniFi app.</td></tr>
+          <tr><td>UniFi PoE switch<small>e.g. USW Lite 8 PoE</small></td><td>Powers and connects the access points.</td><td>Choose port count from the number of access points.</td></tr>
+          <tr><td>Indoor access points<small>e.g. U7 Pro or U6+</small></td><td>Wi-Fi for rooms, dorms and the cowork space.</td><td>Count depends on the floor plan. <span class="flag">Count TBC</span></td></tr>
+          <tr><td>Outdoor access point<small>e.g. U7 Outdoor</small></td><td>Wi-Fi for the café terrace or garden.</td><td>Only if guests sit outside.</td></tr>
+          <tr><td>UPS / battery backup</td><td>Keeps the dish, router, gateway and switch running in a power cut.</td><td>The Starlink Standard dish draws roughly 75–100 W on average. Size the runtime you want to promise.</td></tr>
+          <tr><td>Cabling and mounts</td><td>Outdoor-rated Cat6, dish mount, wall or ceiling mounts.</td><td>Run cable to each access point. Avoid Wi-Fi mesh hops where you can.</td></tr>
+          <tr><td>Printer<small>optional</small></td><td>Prints Wi-Fi code sheets from UniFi.</td><td>A normal A4 printer is enough.</td></tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+</section>
+
+<section>
+  <div class="wrap stack" style="gap:28px">
+    <div class="stack"><span class="eyebrow">Wi-Fi codes</span><h2>One code type per guest</h2>
+      <p class="lede">Make these as voucher profiles in UniFi. The clock on a code starts when it is first used, so a printed batch can sit at the desk until it's needed. Speeds are starting points: tune them after the speed test.</p></div>
+    <div class="tablewrap">
+      <table>
+        <thead><tr><th scope="col">Code</th><th scope="col">Valid for</th><th scope="col">Devices</th><th scope="col">Down / up</th><th scope="col">Data cap</th><th scope="col">Given out</th></tr></thead>
+        <tbody>
+          <tr><td>Stay · 1 night</td><td class="num">30 hours</td><td class="num">3</td><td class="num">15 / 5 Mbps</td><td>None</td><td>At check-in</td></tr>
+          <tr><td>Stay · 2 nights</td><td class="num">54 hours</td><td class="num">3</td><td class="num">15 / 5 Mbps</td><td>None</td><td>At check-in</td></tr>
+          <tr><td>Stay · 3 nights</td><td class="num">78 hours</td><td class="num">3</td><td class="num">15 / 5 Mbps</td><td>None</td><td>At check-in</td></tr>
+          <tr><td>Stay · 7 nights</td><td class="num">174 hours</td><td class="num">3</td><td class="num">15 / 5 Mbps</td><td>None</td><td>At check-in</td></tr>
+          <tr><td>Cowork · day</td><td class="num">14 hours</td><td class="num">2</td><td class="num">30 / 10 Mbps</td><td>None</td><td>With the day pass</td></tr>
+          <tr><td>Cowork · week</td><td class="num">7 days</td><td class="num">2</td><td class="num">30 / 10 Mbps</td><td>None</td><td>With the weekly pass</td></tr>
+          <tr><td>Café</td><td class="num">3 hours</td><td class="num">1</td><td class="num">5 / 2 Mbps</td><td class="num">1 GB</td><td>On the receipt or a table card</td></tr>
+        </tbody>
+      </table>
+    </div>
+    <p style="font-size:15px;color:var(--muted)">Stay codes add 6 hours of grace to each night. Longer stays: stack codes or make a 14-night profile. Staff use their own password network, not codes.</p>
+  </div>
+</section>
+
+<section>
+  <div class="wrap stack" style="gap:28px">
+    <div class="stack"><span class="eyebrow">Setup</span><h2>Install, in order</h2>
+      <p style="font-size:14px;color:var(--muted)">UniFi menu names shift a little between versions. Look for the closest match.</p></div>
+    <ol class="steps">
+      <li><div><h3>Check coverage before you buy</h3><p>In the Starlink app, check coverage and obstructions at the exact Kahawa spot where the dish will go.</p></div></li>
+      <li><div><h3>Install the dish and Starlink router</h3><p>Mount with a clear sky view, run the cable, power up and let it update in the Starlink app.</p></div></li>
+      <li><div><h3>Turn on Bypass Mode</h3><p>Starlink app → Settings → Router → Bypass Mode. Starlink's own Wi-Fi switches off. Undoing it needs a factory reset.</p></div></li>
+      <li><div><h3>Connect the UniFi gateway</h3><p>Starlink router Ethernet port → Cloud Gateway Ultra WAN port. Gateway LAN → PoE switch → access points.</p></div></li>
+      <li><div><h3>Set up UniFi</h3><p>Set up the gateway in the UniFi app, adopt the switch and access points, update all firmware.</p></div></li>
+      <li><div><h3>Create two networks</h3><p>Staff on the default network. A new Guest network for guests, kept apart from staff devices, tills and printers.</p></div></li>
+      <li><div><h3>Create two Wi-Fi names</h3><p><b>NAAMI Staff</b>: password protected. <b>NAAMI Guest</b>: no password, Hotspot login page on, client device isolation on.</p></div></li>
+      <li><div><h3>Brand the login page</h3><p>Hotspot / Portal settings: sign-in method Voucher. Upload the logo and background, paste the text and colours from the next section.</p></div></li>
+      <li><div><h3>Create code profiles and print a batch</h3><p>Hotspot → Vouchers: one batch per code type from the table above. Print and file them at the desk.</p></div></li>
+      <li><div><h3>Speed test at the busiest time</h3><p>Test in the evening when the house is full. Adjust the code speeds so the total fits the link. Put the measured Mbps on the website.</p></div></li>
+      <li><div><h3>Test as a guest</h3><p>Join NAAMI Guest on an iPhone and an Android phone. Try a valid code, a wrong code and an expired one.</p></div></li>
+    </ol>
+  </div>
+</section>
+
+<section>
+  <div class="wrap stack" style="gap:28px">
+    <div class="stack"><span class="eyebrow">Login page</span><h2>Paste into UniFi</h2></div>
+    <dl class="fields">
+      <div><dt>Wi-Fi name</dt><dd>NAAMI Guest</dd><button class="copy" type="button" data-copy="NAAMI Guest">Copy</button></div>
+      <div><dt>Title</dt><dd>Welcome to Nāami</dd><button class="copy" type="button" data-copy="Welcome to Nāami">Copy</button></div>
+      <div><dt>Message</dt><dd>Enter the Wi-Fi code from your check-in card, cowork pass or café receipt.</dd><button class="copy" type="button" data-copy="Enter the Wi-Fi code from your check-in card, cowork pass or café receipt.">Copy</button></div>
+      <div><dt>Terms</dt><dd>By connecting you agree to the Nāami house rules. Keep large downloads and streaming light so everyone can work and call. Don't use the network for anything illegal. Codes are for one guest and expire at the end of their time.</dd><button class="copy" type="button" data-copy="By connecting you agree to the Nāami house rules. Keep large downloads and streaming light so everyone can work and call. Don't use the network for anything illegal. Codes are for one guest and expire at the end of their time.">Copy</button></div>
+      <div><dt>After login, go to</dt><dd>The Nāami website (use the final domain once it's live)</dd><button class="copy" type="button" data-copy="https://rasaljayasinghe.github.io/naami/">Copy</button></div>
+      <div><dt>Button colour</dt><dd><span class="swatch" style="background:#111211"></span>#111211</dd><button class="copy" type="button" data-copy="#111211">Copy</button></div>
+      <div><dt>Text colour</dt><dd><span class="swatch" style="background:#111211"></span>#111211</dd><button class="copy" type="button" data-copy="#111211">Copy</button></div>
+      <div><dt>Box / page colour</dt><dd><span class="swatch" style="background:#fbfbf9"></span>#fbfbf9</dd><button class="copy" type="button" data-copy="#fbfbf9">Copy</button></div>
+    </dl>
+    <div class="assets">
+      <div class="asset"><span class="thumb" style="background-image:url('portal-logo.png')"></span><code>wifi/portal-logo.png</code><span>Logo for a light box. Use this one with the layout above.</span></div>
+      <div class="asset"><span class="thumb dark" style="background-image:url('portal-logo-white.png')"></span><code>wifi/portal-logo-white.png</code><span>Logo for a dark background.</span></div>
+      <div class="asset"><span class="thumb cover" style="background-image:url('portal-bg.jpg')"></span><code>wifi/portal-bg.jpg</code><span>Background, 1920×1080. Swap for a real property photo later.</span></div>
+    </div>
+    <p style="font-size:14px;color:var(--muted)">The files are in the GitHub repo, RasalJayasinghe/naami, in the <code>wifi</code> folder. The Wi-Fi name has no macron (Ā) because some older phones and laptops show accented Wi-Fi names as garbled text.</p>
+  </div>
+</section>
+
+<section>
+  <div class="wrap stack" style="gap:28px">
+    <div class="stack"><span class="eyebrow">Before you order</span><h2>Checks</h2></div>
+    <ul class="checks">
+      <li><span class="flag">Plan terms</span><h3>Residential vs Business</h3><p>Starlink sells Business plans for commercial sites. Read the Residential terms on guest and commercial use before relying on it for a hostel, and get a Business quote at starlink.com/en-lk/business to compare.</p></li>
+      <li><span class="flag">Coverage</span><h3>Exact location</h3><p>Confirm coverage and a clear sky view at the dish spot in the Starlink app.</p></li>
+      <li><span class="flag">Floor plan</span><h3>How many access points</h3><p>Walls, floors and the café layout decide the count. A sketch with room positions is enough for an installer to quote.</p></li>
+      <li><span class="flag">Power</span><h3>Backup runtime</h3><p>Decide how long Wi-Fi must survive a power cut, then size the UPS. That number also goes on the website trust strip.</p></li>
+      <li><span class="flag">Backup link</span><h3>Second connection, later</h3><p>If cowork grows, add local fibre or 4G as a backup. The UniFi gateway can switch over automatically.</p></li>
+      <li><span class="flag">Website</span><h3>Publish the facts</h3><p>Once tested, add the measured Mbps, backup power and code policy to the Work and House rules pages.</p></li>
+    </ul>
+  </div>
+</section>
+</main>
+
+<footer><div class="wrap"><span>Nāami Coast Club · Guest Wi-Fi plan</span><span>Prices and product names checked 6 November 2026. Hardware prices: get local quotes.</span></div></footer>
+
+<script>
+(function(){
+  var form=document.getElementById('portal'),code=document.getElementById('code'),msg=document.getElementById('msg'),agree=document.getElementById('agree');
+  code.addEventListener('input',function(){var d=code.value.replace(/\D/g,'').slice(0,10);code.value=d.length>5?d.slice(0,5)+'-'+d.slice(5):d;});
+  form.addEventListener('submit',function(e){
+    e.preventDefault();
+    if(!agree.checked){msg.textContent='Please agree to the house rules to connect.';return;}
+    if(code.value.replace(/\D/g,'').length!==10){msg.textContent='Codes are 10 digits. Check your card and try again.';return;}
+    msg.textContent='Preview only. On site, UniFi checks the code and connects you.';
+  });
+  document.querySelectorAll('[data-copy]').forEach(function(b){
+    b.addEventListener('click',function(){
+      var t=b.getAttribute('data-copy');
+      var done=function(){var o=b.textContent;b.textContent='Copied';setTimeout(function(){b.textContent=o;},1400);};
+      try{navigator.clipboard.writeText(t).then(done,function(){sel(b);});}catch(err){sel(b);}
+    });
+  });
+  function sel(b){var dd=b.previousElementSibling;var r=document.createRange();r.selectNodeContents(dd);var s=window.getSelection();s.removeAllRanges();s.addRange(r);b.textContent='Selected';}
+})();
+</script>
+</body>
+</html>

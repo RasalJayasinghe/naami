@@ -16,3 +16,8 @@ Open `index.html` in a browser to view.
 - `assets/og-image.jpg` (1200×630, ~120 KB, under WhatsApp's preview limit) is used for Open Graph and Twitter/X cards.
 - `og:url`, `og:image`, `twitter:image` and `canonical` point at `https://rasaljayasinghe.github.io/naami/`. Update them when the real domain goes live, since social platforms need absolute URLs.
 - Once real photography arrives, regenerate the OG image with a property photo in place of the drawn scene.
+
+## Guest Wi-Fi (`wifi/`)
+
+- `wifi/index.html` — setup plan for Starlink + UniFi guest Wi-Fi: shopping list, voucher (Wi-Fi code) profiles, install steps, login-page copy and checks. Not linked from the site; `noindex`.
+- `wifi/portal-logo.png`, `wifi/portal-logo-white.png`, `wifi/portal-bg.jpg` — assets to upload into the UniFi Hotspot portal designer.
